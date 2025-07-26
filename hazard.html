@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TATA MEMORIAL CENTRE SAFETY INFRASTRUCTURE APP</title>
+    <style>
+        :root {
+            --primary-color: #005f87;
+            --secondary-color: #00a5e3;
+            --accent-color: #ff6b00;
+            --danger-color: #e53935;
+            --success-color: #43a047;
+            --background-color: #f5f5f5;
+            --card-color: #ffffff;
+            --text-primary: #212121;
+            --text-secondary: #757575;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            max-width: 414px;
+            margin: 0 auto;
+            height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .app-container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Enhanced Header */
+        .app-header {
+            background: linear-gradient(135deg, #005f87 0%, #00a5e3 100%);
+            padding: 15px 20px;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-image img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 12px;
+        }
+
+        .app-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+            display: none;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header-icons i {
+            font-size: 22px;
+            color: white;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .header-icons i:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Enhanced Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+
+        /* Enhanced Emergency Section */
+        .emergency-section {
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .emergency-btn {
+            background: linear-gradient(135deg, var(--danger-color) 0%, #d32f2f 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .emergency-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(229, 57, 53, 0.5);
+        }
+
+        .emergency-btn i {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4); }
+            50% { box-shadow: 0 6px 20px rgba(229, 57, 53, 0.6); }
+            100% { box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4); }
+        }
+
+        .emergency-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        /* Enhanced Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .quick-action-btn {
+            background-color: var(--card-color);
+            border: none;
+            border-radius: 12px;
+            padding: 16px 8px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .quick-action-btn i {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        /* Enhanced Dashboard Section */
+        .dashboard-section {
+            margin-bottom: 28px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            font-size: 22px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--card-color) 0%, #f8f9fa 100%);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-card i {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .stat-card .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+
+        .stat-card .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .workers-present { color: var(--success-color); }
+        .active-alerts { color: var(--danger-color); }
+        .hazards-reported { color: var(--accent-color); }
+
+        /* Enhanced Feature Items */
+        .features-list {
+            background-color: var(--card-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .feature-item {
+            padding: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-item:hover {
+            background-color: var(--background-color);
+            border-color: var(--primary-color);
+            transform: translateX(4px);
+        }
+
+        .feature-item h3 {
+            font-size: 16px;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .feature-item p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Enhanced Check-in Section */
+        .check-in-card {
+            background: linear-gradient(135deg, var(--card-color) 0%, #f8f9fa 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .check-in-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 16px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .check-in-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 95, 135, 0.3);
+        }
+
+        .check-in-status {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .checked-in {
+            color: var(--success-color);
+        }
+
+        /* About Page Styles */
+        .about-page {
+            padding: 0;
+        }
+
+ .about-header {
+    background: linear-gradient(135deg, #000000 0%, #0096b7 100%); /* Blue to teal gradient */
+    color: white;
+    padding: 24px 20px;
+    margin: -20px -20px 20px -20px;
+    text-align: center;
+}
+
+
+        .about-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .about-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .org-chart-container {
+            background-color: var(--card-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .org-section {
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .org-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .org-section-title {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .flow-level {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .flow-node {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 8px;
+            box-shadow: var(--shadow);
+            position: relative;
+            min-width: 200px;
+        }
+
+        .flow-node.main {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #f57c00 100%);
+            font-size: 16px;
+            padding: 16px 20px;
+        }
+
+        .flow-arrow {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 12px solid var(--primary-color);
+            margin: 4px 0;
+        }
+
+        .sub-nodes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .sub-node {
+            background: linear-gradient(135deg, var(--card-color) 0%, #f8f9fa 100%);
+            color: var(--text-primary);
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 500;
+            text-align: center;
+            border: 2px solid var(--primary-color);
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .sub-node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .project-info-card {
+            background: linear-gradient(135deg, var(--success-color) 0%, #388e3c 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .project-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-details {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .project-detail {
+            background: rgba(255,255,255,0.1);
+            padding: 12px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .project-detail-label {
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .project-detail-value {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .cost-highlight {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #f57c00 100%);
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .cost-amount {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .cost-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Google Map Styles */
+        .map-container {
+            background-color: var(--card-color);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .map-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .map-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .map-legend {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.online {
+            background-color: var(--success-color);
+        }
+
+        .legend-dot.offline {
+            background-color: var(--text-secondary);
+        }
+
+        #map {
+            width: 100%;
+            height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #e0e0e0;
+            position: relative;
+        }
+
+        /* Custom Map Markers */
+        .worker-marker {
+            width: 30px;
+            height: 30px;
+            background-color: var(--success-color);
+            border: 3px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: absolute;
+        }
+
+        .worker-marker:hover {
+            transform: scale(1.2);
+            z-index: 10;
+        }
+
+        .worker-marker.supervisor {
+            background-color: var(--accent-color);
+        }
+
+        .worker-marker.safety-officer {
+            background-color: var(--primary-color);
+        }
+
+        /* Worker Info Popup */
+        .worker-popup {
+            position: absolute;
+            background: white;
+            border-radius: 8px;
+            padding: 8px 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 20;
+            display: none;
+            border: 2px solid var(--primary-color);
+        }
+
+        .worker-popup::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--primary-color);
+        }
+
+        /* Enhanced Bottom Navigation */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            background: linear-gradient(135deg, var(--card-color) 0%, #f8f9fa 100%);
+            padding: 12px 0;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            z-index: 10;
+            margin-top: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 500;
+            padding: 8px 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: var(--primary-color);
+            background-color: rgba(0, 95, 135, 0.1);
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        /* Page Transitions */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Enhanced Regulation Page */
+        .regulation-page {
+            padding: 0;
+        }
+
+        .regulation-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 24px 20px;
+            margin: -20px -20px 20px -20px;
+        }
+
+        .regulation-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .regulation-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .regulation-content {
+            background-color: var(--card-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .regulation-section {
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .regulation-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .regulation-section h3 {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .regulation-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .regulation-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .regulation-list li {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .regulation-list li:before {
+            content: "✓";
+            color: var(--success-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .pdf-viewer-container {
+            background-color: var(--card-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .pdf-placeholder {
+            height: 300px;
+            background: linear-gradient(135deg, var(--background-color) 0%, #e3f2fd 100%);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--primary-color);
+        }
+
+        .pdf-placeholder i {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #f57c00 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.3);
+        }
+
+        /* Enhanced Forms */
+        .hazard-form {
+            background-color: var(--card-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--success-color) 0%, #388e3c 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 160, 71, 0.3);
+        }
+
+        /* Enhanced Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            overflow: hidden;
+            animation: modalSlideIn 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(-30px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--danger-color) 0%, #d32f2f 100%);
+            color: white;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .modal-body {
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            padding: 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            background-color: #f8f9fa;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cancel-btn {
+            background-color: #e0e0e0;
+            color: var(--text-primary);
+        }
+
+        .cancel-btn:hover {
+            background-color: #d0d0d0;
+        }
+
+        .confirm-btn {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Enhanced Alert */
+        .alert {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--success-color) 0%, #388e3c 100%);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(67, 160, 71, 0.3);
+            z-index: 1000;
+            display: none;
+            animation: alertSlideIn 0.3s ease;
+            font-weight: 600;
+        }
+
+        @keyframes alertSlideIn {
+            from { opacity: 0; transform: translate(-50%, -20px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        /* Worker List Styles */
+        .workers-list-container {
+            background-color: var(--background-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .workers-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .workers-list-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .refresh-btn {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .refresh-btn:hover {
+            background-color: rgba(0, 95, 135, 0.1);
+        }
+
+        .worker-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s;
+        }
+
+        .worker-item:hover {
+            background-color: rgba(0, 95, 135, 0.05);
+            border-radius: 4px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .worker-item:last-child {
+            border-bottom: none;
+        }
+
+        .worker-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 12px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .worker-info {
+            flex: 1;
+        }
+
+        .worker-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .worker-details {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .worker-status {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-icon {
+            font-size: 16px;
+        }
+
+        .status-online {
+            color: var(--success-color);
+        }
+
+        .status-supervisor {
+            color: var(--accent-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 375px) {
+            .app-title {
+                font-size: 14px;
+            }
+            
+            .emergency-btn {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            #map {
+                height: 200px;
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sub-nodes {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Icons */
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Enhanced Header -->
+        <div class="app-header">
+            <div class="back-button" id="back-button">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+            <div class="header-content">
+                <div class="hero-image">
+                    <img src="./actrec/actrec-logo.png" alt="ACTREC Logo">
+                </div>
+                <h1 class="app-title">"SAFETY APP" FOR CONSTRUCTION WORKER AT TATA MEMORIAL CENTRE</h1>
+                <div class="header-icons">
+                    <i class="fas fa-bell" id="notifications-btn"></i>
+                    <i class="fas fa-user" id="profile-btn"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div class="main-content page active" id="dashboard-page">
+            <!-- Emergency Section -->
+            <div class="emergency-section">
+                <button class="emergency-btn" id="emergency-btn">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    EMERGENCY
+                </button>
+                <p class="emergency-text">Press in case of emergency. Your location will be shared immediately.</p>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="quick-action-btn" id="home-btn">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </button>
+                    <button class="quick-action-btn" id="about-btn">
+                        <i class="fas fa-info-circle"></i>
+                        <span>About</span>
+                    </button>
+                    <button class="quick-action-btn" id="hazard-btn">
+                        <i class="fas fa-triangle-exclamation"></i>
+                        <span>Hazard</span>
+                    </button>
+                    <button class="quick-action-btn" id="report-btn">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Report</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Regulation Section -->
+            <div class="dashboard-section">
+                <h2 class="section-title">
+                    <i class="fas fa-gavel"></i> View the Operational Health and Safety Act
+                </h2>
+                <div class="features-list">
+                    <div class="feature-item" id="regulation-item">
+                        <h3>Occupational Health & Safety Regulation</h3>
+                        <p>Access detailed guidelines and legal frameworks for construction site safety and worker protection.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Safety Dashboard -->
+            <div class="dashboard-section">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-line"></i> Safety Dashboard
+                </h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-value workers-present" id="workers-count">37</div>
+                        <div class="stat-label">Workers Present</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div class="stat-value active-alerts" id="alerts-count">4</div>
+                        <div class="stat-label">Active Alerts</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-hard-hat"></i>
+                        <div class="stat-value">200</div>
+                        <div class="stat-label">Total Workers</div>
+                    </div>
+                       <div class="stat-card">
+                        <i class="fas fa-hard-hat"></i>
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Assembly Point Sessions</div>
+                    </div>
+                       <div class="stat-card">
+                        <i class="fas fa-hard-hat"></i>
+                        <div class="stat-value">20</div>
+                        <div class="stat-label">Induction Completed New Joining Staff</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-triangle-exclamation"></i>
+                        <div class="stat-value hazards-reported" id="hazards-count">1</div>
+                        <div class="stat-label">Hazards Today</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Worker Check-In -->
+            <div class="dashboard-section">
+                <h2 class="section-title">
+                    <i class="fas fa-user-check"></i> Worker Check-In
+                </h2>
+                <div class="check-in-card">
+                    <i class="fas fa-qrcode" style="font-size: 48px; color: var(--primary-color);"></i>
+                    <p>Scan QR code at site entrance</p>
+                    <button class="check-in-btn" id="check-in-btn">
+                        <i class="fas fa-sign-in-alt"></i> CHECK IN
+                    </button>
+                    <p class="check-in-status">Status: <span id="check-in-status">Not checked in</span></p>
+                </div>
+            </div>
+        </div>
+           <!-- Regulation Section
+            <div class="dashboard-section">
+                <h2 class="section-title">
+                    <i class="fas fa-gavel"></i> Emergency Preparedness plan 
+                </h2>
+                <div class="features-list">
+                    <div class="feature-item" id="regulation-item">
+                        <h3>Sample plan </h3>
+                        <p>Access detailed guidelines and legal frameworks for construction site safety and worker protection.</p>
+                    </div>
+                </div>
+            </div> -->
+        <!-- About Page -->
+        <div class="main-content page" id="about-page">
+            <div class="about-page">
+                <div class="about-header">
+                    <h1 class="about-title">Organization</h1>
+                    <p class="about-subtitle">TMC-ACTREC GOVT. OF INDIA Construction Project</p>
+                </div>
+                
+                <!-- PMC & HOSMAC Section -->
+                <div class="org-chart-container">
+                    <div class="org-section">
+                        <h3 class="org-section-title">
+                            <i class="fas fa-sitemap"></i> 
+                        </h3>
+                        <div class="flowchart">
+                            <div class="flow-level">
+                                <div class="flow-node main">Project Director and Owner</div>
+                                <div class="flow-arrow"></div>
+                                <div class="flow-node">HOSMAC (PMC & Facility Planners)</div>
+                                <div class="flow-arrow"></div>
+                                <div class="sub-nodes">
+                                    <div class="sub-node">
+                                        <i class="fas fa-user-md"></i><br>
+                                        Medical Planners / Team of Specialized Doctors
+                                    </div>
+                                    <div class="sub-node">
+                                        <i class="fas fa-drafting-compass"></i><br>
+                                        Medical Architect cum consultant
+                                    </div>
+                                    <div class="sub-node">
+                                        <i class="fas fa-palette"></i><br>
+                                        Project Coordinators
+                                    </div>
+                                    <div class="sub-node">
+                                        <i class="fas fa-comments"></i><br>
+                                        Interior Designers (Civil & MEP Team)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Administrators Section -->
+                    <div class="org-section">
+                        <h3 class="org-section-title">
+                            <i class="fas fa-users-cog"></i>
+                        </h3>
+                        <div class="flowchart">
+                            <div class="flow-level">
+                                <div class="flow-node">Administrators</div>
+                                <div class="flow-arrow"></div>
+                                <div class="sub-nodes">
+                                    <div class="sub-node">
+                                        <i class="fas fa-cogs"></i><br>
+                                        Architect & Planners
+                                    </div>
+                                    <div class="sub-node">
+                                        <i class="fas fa-building"></i><br>
+                                         Chief Administrative Officer and Account Officer
+                                    </div>
+                                    <div class="sub-node">
+                                        <i class="fas fa-heartbeat"></i><br>
+                                        Chief Engineer and Engineers 
+                                    </div>
+                                    <div class="sub-node">
+                                        <i class="fas fa-calculator"></i><br>
+                                        Safety Officer/Fire Officer and Biomedical Engineer
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Information -->
+                <div class="project-info-card">
+                    <div class="project-title">
+                        <i class="fas fa-building"></i> Authorized Execution Agency
+                    </div>
+                    <div class="project-details">
+                        <div class="project-detail">
+                            <span class="project-detail-label">Contractor:</span>
+                            <span class="project-detail-value">L & T Powai, Mumbai</span>
+                        </div>
+                        <div class="project-detail">
+                            <span class="project-detail-label">Project Type:</span>
+                            <span class="project-detail-value">Multi Speciality Hospital G+14</span>
+                        </div>
+                        <div class="project-detail">
+                            <span class="project-detail-label">Status:</span>
+                            <span class="project-detail-value">Under Construction</span>
+                        </div>
+                    </div>
+                    <div class="cost-highlight">
+                        <div class="cost-amount">₹380 Crores</div>
+                        <div class="cost-label">Total Project Cost</div>
+                    </div>
+                </div>
+
+                <!-- Additional Project Stats -->
+                <div class="org-chart-container">
+                    <h3 class="org-section-title">
+                        <i class="fas fa-chart-bar"></i> Project Statistics
+                    </h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-layer-group"></i>
+                            <div class="stat-value" style="color: var(--primary-color);">15</div>
+                            <div class="stat-label">Total Floors</div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-warehouse"></i>
+                            <div class="stat-value" style="color: var(--accent-color);">Storage</div>
+                            <div class="stat-label">Primary Function</div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="stat-value" style="color: var(--success-color);">Navi Mumbai,Maharashtra</div>
+                            <div class="stat-label">Location</div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div class="stat-value" style="color: var(--danger-color);">March 2027</div>
+                            <div class="stat-label">Target Year</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Regulation Page -->
+        <div class="main-content page" id="regulation-page">
+            <div class="regulation-page">
+                <div class="regulation-header">
+                    <h1 class="regulation-title">Occupational Health & Safety Regulation</h1>
+                    <p class="regulation-subtitle">Construction Site Safety Guidelines</p>
+                </div>
+                
+                <div class="regulation-content">
+                    <div class="regulation-section">
+                        <h3><i class="fas fa-hard-hat"></i> General Safety Requirements</h3>
+                        <p>All construction sites must comply with the following safety standards:</p>
+                        <ul class="regulation-list">
+                            <li>Personal Protective Equipment (PPE) must be worn at all times</li>
+                            <li>Safety training must be completed before site access</li>
+                            <li>Emergency procedures must be clearly posted and communicated</li>
+                            <li>Regular safety inspections must be conducted daily</li>
+                            <li>All equipment must be inspected before use</li>
+                           <li>Fire Fighting and Fire alarming system health record.</li> 
+                        </ul>
+                    </div>
+                    
+                    <div class="regulation-section">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Hazard Reporting</h3>
+                        <p>Workers are required to report any safety hazards immediately:</p>
+                        <ul class="regulation-list">
+                            <li>Use the mobile app to report hazards in real-time</li>
+                            <li>Include photographic evidence when possible</li>
+                            <li>Specify exact location and nature of the hazard</li>
+                            <li>Follow up on reported hazards until resolved</li>
+                            <li>Report near-miss incidents for prevention</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="regulation-section">
+                        <h3><i class="fas fa-ambulance"></i> Emergency Procedures</h3>
+                        <p>In case of emergency, follow these procedures:</p>
+                        <ul class="regulation-list">
+                            <li>Press the emergency button in the mobile app</li>
+                            <li>Evacuate to designated assembly points</li>
+                            <li>Contact emergency services if required</li>
+                            <li>Report to site supervisor for accountability</li>
+                            <li>Provide first aid if trained and safe to do so</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="regulation-section">
+                        <h3><i class="fas fa-user-shield"></i> Worker Responsibilities</h3>
+                        <p>Every worker has the following responsibilities:</p>
+                        <ul class="regulation-list">
+                            <li>Check in and out using QR codes daily</li>
+                            <li>Maintain awareness of surroundings and potential hazards</li>
+                            <li>Use tools and equipment safely and as intended</li>
+                            <li>Participate in safety meetings and training sessions</li>
+                            <li>Report unsafe conditions or behaviors immediately</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="pdf-viewer-container">
+                    <h3 class="section-title">
+                        <i class="fas fa-file-pdf"></i> Complete Regulation Document
+                    </h3>
+                    <div class="pdf-placeholder">
+                        <i class="fas fa-file-pdf"></i>
+                        <h4>Occupational Health & Safety Act</h4>
+                        <p style="font-size: 14px; color: var(--text-secondary); margin-top: 8px;">Complete regulation document (PDF)</p>
+                    </div>
+                    <button class="download-btn" id="download-pdf-btn">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hazard Reporting Page -->
+        <div class="main-content page" id="hazard-page">
+            <h2 class="section-title">
+                <i class="fas fa-triangle-exclamation"></i> Report Hazard
+            </h2>
+            <div class="hazard-form">
+                <div class="form-group">
+                    <label for="hazard-type">Hazard Type *</label>
+                    <select id="hazard-type" required>
+                        <option value="">Select hazard type</option>
+                        <option value="fall">Fall Hazard</option>
+                        <option value="electrical">Electrical Hazard</option>
+                        <option value="chemical">Chemical Hazard</option>
+                        <option value="struck">Struck-by Hazard</option>
+                        <option value="caught">Caught between Hazard</option>
+                        <option value="fire">Fire Hazard</option>
+                        <option value="fire">Near Miss</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                 <label for="hazard-type">OR </label>
+                                <div class="form-group">
+                    <label for="hazard-type">Proforama </label>
+                    <select id="hazard-type" required>
+                        <option value="">Select Proforama type</option>
+                        <option value="fall">Work Permits</option>
+                        <option value="electrical">Incident/Accident Report</option>
+                        <option value="chemical">Incident/Accient Investigation Report</option>
+                        <option value="struck">Near Miss Report</option>
+                        <option value="caught">Warning Letter</option>
+                        <option value="fire">Termination</option>
+                            <!-- <option value="fire">Near Miss</option>
+                            <option value="other">Other</option> -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="hazard-location">Location *</label>
+                    <input type="text" id="hazard-location" placeholder="Enter exact hazard location" required>
+                </div>
+                <div class="form-group">
+                    <label for="hazard-description">Description *</label>
+                    <textarea id="hazard-description" placeholder="Describe the hazard in detail" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="severity-level">Severity Level</label>
+                    <select id="severity-level">
+                        <option value="low">Low - Minor risk</option>
+                        <option value="medium">Medium - Moderate risk</option>
+                        <option value="high">High - Serious risk</option>
+                        <option value="critical">Critical - Immediate danger</option>
+                    </select>
+                </div>
+                <button class="submit-btn" id="submit-hazard-btn">
+                    <i class="fas fa-paper-plane"></i> SUBMIT HAZARD REPORT
+                </button>
+            </div>
+        </div>
+
+        <!-- Enhanced Location Page with Google Map -->
+        <div class="main-content page" id="location-page">
+            <h2 class="section-title">
+                <i class="fas fa-map-marker-alt"></i> Site Location & Workers
+            </h2>
+            
+            <!-- Google Map Container -->
+            <div class="map-container">
+                <div class="map-header">
+                    <div class="map-title">
+                        <i class="fas fa-map"></i> Live Worker Locations
+                    </div>
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <div class="legend-dot online"></div>
+                            <span>Online</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot offline"></div>
+                            <span>Offline</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="map">
+                    <!-- Simulated Map Background -->
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); position: relative; overflow: hidden;">
+                        <!-- Construction Site Layout -->
+                        <div style="position: absolute; top: 20px; left: 20px; right: 20px; height: 40px; background-color: #8d6e63; border-radius: 4px; opacity: 0.7;"></div>
+                        <div style="position: absolute; top: 80px; left: 20px; width: 60px; height: 80px; background-color: #795548; border-radius: 4px; opacity: 0.7;"></div>
+                        <div style="position: absolute; top: 80px; right: 20px; width: 60px; height: 80px; background-color: #795548; border-radius: 4px; opacity: 0.7;"></div>
+                        <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; height: 30px; background-color: #616161; border-radius: 4px; opacity: 0.7;"></div>
+                        
+                        <!-- Worker Markers -->
+                        <div class="worker-marker" style="top: 45%; left: 25%;" data-worker="Rajesh Kumar" data-time="07:45 AM" data-role="Worker">
+                            RK
+                        </div>
+                        <div class="worker-marker" style="top: 35%; left: 60%;" data-worker="Priya Sharma" data-time="08:15 AM" data-role="Worker">
+                            PS
+                        </div>
+                        <div class="worker-marker supervisor" style="top: 25%; left: 45%;" data-worker="Amit Singh" data-time="07:30 AM" data-role="Supervisor">
+                            AS
+                        </div>
+                        <div class="worker-marker safety-officer" style="top: 55%; left: 70%;" data-worker="Dr. Meera Patel" data-time="07:00 AM" data-role="Safety Officer">
+                            MP
+                        </div>
+                        <div class="worker-marker" style="top: 65%; left: 35%;" data-worker="Suresh Kumar" data-time="08:00 AM" data-role="Worker" map-link="https://maps.app.goo.gl/AteW8ZTkkm2q4rZKA">
+                            SK
+                        </div>
+                        <div class="worker-marker" style="top: 40%; left: 80%;" data-worker="Anita Desai" data-time="08:30 AM" data-role="Worker">
+                            AD
+                        </div>
+                        
+                        <!-- Site Labels -->
+                        <div style="position: absolute; top: 5px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 4px 8px; border-radius: 4px; font-size: 10px;">Main Building</div>
+                        <div style="position: absolute; top: 85px; left: 5px; background: rgba(0,0,0,0.7); color: white; padding: 2px 4px; border-radius: 2px; font-size: 8px;">Block A</div>
+                        <div style="position: absolute; top: 85px; right: 5px; background: rgba(0,0,0,0.7); color: white; padding: 2px 4px; border-radius: 2px; font-size: 8px;">Block B</div>
+                        <div style="position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 2px 4px; border-radius: 2px; font-size: 8px;">Parking Area</div>
+                    </div>
+                    
+                    <!-- Worker Info Popup -->
+                    <div class="worker-popup" id="worker-popup">
+                        <div id="popup-content"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Worker Statistics -->
+            <div class="check-in-card">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                    <span><strong>Total Workers:</strong> 200</span>
+                    <span><strong>Checked In:</strong> <span class="workers-present" id="location-workers-count">37</span></span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 14px;">
+                    <span><i class="fas fa-users" style="color: var(--success-color);"></i> Active: 35</span>
+                    <span><i class="fas fa-user-tie" style="color: var(--accent-color);"></i> Supervisors: 3</span>
+                    <span><i class="fas fa-user-shield" style="color: var(--primary-color);"></i> Safety Officer: 2</span>
+                </div>
+            </div>
+
+            <!-- Recent Check-ins List -->
+            <div class="workers-list-container">
+                <div class="workers-list-header">
+                    <h4 class="workers-list-title">Recent Check-ins</h4>
+                    <button class="refresh-btn" id="refresh-workers">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+                <div id="workers-list">
+                    <div class="worker-item">
+                        <div class="worker-avatar">RK</div>
+                        <div class="worker-info">
+                            <div class="worker-name">Rajesh Kumar</div>
+                            <div class="worker-details">Checked in: 07:45 AM • Block A, Level 2</div>
+                        </div>
+                        <div class="worker-status">
+                            <i class="fas fa-circle status-icon status-online"></i>
+                        </div>
+                    </div>
+                    <div class="worker-item">
+                        <div class="worker-avatar">PS</div>
+                        <div class="worker-info">
+                            <div class="worker-name">Priya Sharma</div>
+                            <div class="worker-details">Checked in: 08:15 AM • Main Building</div>
+                        </div>
+                        <div class="worker-status">
+                            <i class="fas fa-circle status-icon status-online"></i>
+                        </div>
+                    </div>
+                    <div class="worker-item">
+                        <div class="worker-avatar" style="background: linear-gradient(135deg, var(--accent-color) 0%, #f57c00 100%);">AS</div>
+                        <div class="worker-info">
+                            <div class="worker-name">Amit Singh</div>
+                            <div class="worker-details">Checked in: 07:30 AM • Supervisor Office</div>
+                        </div>
+                        <div class="worker-status">
+                            <i class="fas fa-star status-icon status-supervisor"></i>
+                        </div>
+                    </div>
+                    <div class="worker-item">
+                        <div class="worker-avatar" style="background: linear-gradient(135deg, var(--primary-color) 0%, #003d5c 100%);">MP</div>
+                        <div class="worker-info">
+                            <div class="worker-name">Dr. Meera Patel</div>
+                            <div class="worker-details">Checked in: 07:00 AM • Safety Office</div>
+                        </div>
+                        <div class="worker-status">
+                            <i class="fas fa-shield-alt status-icon" style="color: var(--primary-color);"></i>
+                        </div>
+                    </div>
+                    <div class="worker-item">
+                        <div class="worker-avatar">SK</div>
+                        <div class="worker-info">
+                            <div class="worker-name">Suresh Kumar</div>
+                            <div class="worker-details">Checked in: 08:00 AM • Block B, Level 1</div>
+                        </div>
+                        <div class="worker-status">
+                            <i class="fas fa-circle status-icon status-online"></i>
+                        </div>
+                    </div>
+                    <div class="worker-item">
+                        <div class="worker-avatar">AD</div>
+                        <div class="worker-info">
+                            <div class="worker-name">Anita Desai</div>
+                            <div class="worker-details">Checked in: 08:30 AM • Parking Area</div>
+                        </div>
+                        <div class="worker-status">
+                            <i class="fas fa-circle status-icon status-online"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Page -->
+        <div class="main-content page" id="reports-page">
+            <h2 class="section-title">
+                <i class="fas fa-clipboard-list"></i> Safety Reports
+            </h2>
+            <div style="margin-bottom: 20px;">
+                <select id="report-filter" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px;">
+                    <option value="today">Today</option>
+                    <option value="yesterday">Yesterday</option>
+                    <option value="week">This Week</option>
+                    <option value="fortnight">Fortnight</option>
+                    <option value="month">This Month</option>
+                    <option value="quarter">Quarter Months</option>
+                    <option value="half-year">Half Year</option>
+                    <option value="year">This Year</option>
+                </select>
+            </div>
+            <div class="features-list">
+                <div style="padding: 16px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-weight: 600; color: var(--primary-color);">Fall Hazard - Scaffolding</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Block A, Level 3 • 2 hours ago</div>
+                        <div style="font-size: 12px; color: var(--accent-color);">Status: Under Review</div>
+                    </div>
+                    <div style="color: var(--danger-color);">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                </div>
+                <div style="padding: 16px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <div style="font-weight: 600; color: var(--primary-color);">Electrical Safety Check</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Main Panel Room • 4 hours ago</div>
+                        <div style="font-size: 12px; color: var(--success-color);">Status: Resolved</div>
+                    </div>
+                    <div style="color: var(--success-color);">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav" id="bottom-nav">
+            <a href="#" class="nav-item active" data-page="dashboard-page">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item" data-page="about-page">
+                <i class="fas fa-info-circle"></i>
+                <span>About</span>
+            </a>
+            <a href="#" class="nav-item" data-page="hazard-page">
+                <i class="fas fa-triangle-exclamation"></i>
+                <span>Hazard</span>
+            </a>
+            <a href="#" class="nav-item" data-page="location-page">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Location</span>
+            </a>
+            <a href="#" class="nav-item" data-page="reports-page">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Reports</span>
+            </a>
+        </div>
+
+        <!-- Emergency Modal -->
+        <div class="modal" id="emergency-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="fas fa-exclamation-triangle"></i> Emergency Alert
+                </div>
+                <div class="modal-body">
+                    <p><strong>Are you sure you want to send an emergency alert?</strong></p>
+                    <p>This will immediately notify all safety personnel and emergency responders.</p>
+                    <p>Your current location will be shared automatically.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn cancel-btn" id="cancel-emergency">Cancel</button>
+                    <button class="modal-btn confirm-btn" id="confirm-emergency">Send Alert</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Alert -->
+        <div class="alert" id="success-alert">
+            <i class="fas fa-check-circle"></i> Action completed successfully!
+        </div>
+    </div>
+
+    <script>
+        // Application State
+        let isCheckedIn = false;
+        let currentPage = 'dashboard-page';
+
+        // DOM Elements
+        const pages = document.querySelectorAll('.page');
+        const navItems = document.querySelectorAll('.nav-item');
+        const backButton = document.getElementById('back-button');
+        const bottomNav = document.getElementById('bottom-nav');
+        const successAlert = document.getElementById('success-alert');
+        const workerPopup = document.getElementById('worker-popup');
+
+        // Navigation Functions
+        function showPage(pageId) {
+            // Hide all pages
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                currentPage = pageId;
+            }
+            
+            // Update back button visibility
+            updateBackButton();
+            
+            // Update navigation
+            updateNavigation(pageId);
+        }
+
+        function updateBackButton() {
+            if (currentPage === 'dashboard-page') {
+                backButton.style.display = 'none';
+                bottomNav.style.display = 'flex';
+            } else if (currentPage === 'regulation-page' || currentPage === 'about-page') {
+                backButton.style.display = 'block';
+                bottomNav.style.display = 'none';
+            } else {
+                backButton.style.display = 'none';
+                bottomNav.style.display = 'flex';
+            }
+        }
+
+        function updateNavigation(pageId) {
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-page') === pageId) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        function showAlert(message, type = 'success') {
+            const alert = document.getElementById('success-alert');
+            alert.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'}"></i> ${message}`;
+            alert.style.display = 'block';
+            
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 3000);
+        }
+
+        // Worker Map Interactions
+        function initializeWorkerMap() {
+            const workerMarkers = document.querySelectorAll('.worker-marker');
+            
+            workerMarkers.forEach(marker => {
+                marker.addEventListener('click', (e) => {
+                    const workerName = marker.getAttribute('data-worker');
+                    const checkInTime = marker.getAttribute('data-time');
+                    const role = marker.getAttribute('data-role');
+                    
+                    const popupContent = `
+                        <div style="font-weight: 600; margin-bottom: 4px;">${workerName}</div>
+                        <div style="font-size: 11px; color: var(--text-secondary); margin-bottom: 2px;">Role: ${role}</div>
+                        <div style="font-size: 11px; color: var(--text-secondary);">Check-in: ${checkInTime}</div>
+                    `;
+                    
+                    document.getElementById('popup-content').innerHTML = popupContent;
+                    
+                    // Position popup above marker
+                    const rect = marker.getBoundingClientRect();
+                    const mapRect = document.getElementById('map').getBoundingClientRect();
+                    
+                    workerPopup.style.left = (rect.left - mapRect.left - 40) + 'px';
+                    workerPopup.style.top = (rect.top - mapRect.top - 60) + 'px';
+                    workerPopup.style.display = 'block';
+                    
+                    // Hide popup after 3 seconds
+                    setTimeout(() => {
+                        workerPopup.style.display = 'none';
+                    }, 3000);
+                });
+
+                // Add hover effect
+                marker.addEventListener('mouseenter', () => {
+                    marker.style.transform = 'scale(1.2)';
+                    marker.style.zIndex = '10';
+                });
+
+                marker.addEventListener('mouseleave', () => {
+                    marker.style.transform = 'scale(1)';
+                    marker.style.zIndex = '1';
+                });
+            });
+
+            // Hide popup when clicking elsewhere on map
+            document.getElementById('map').addEventListener('click', (e) => {
+                if (!e.target.classList.contains('worker-marker')) {
+                    workerPopup.style.display = 'none';
+                }
+            });
+        }
+
+        // Refresh Workers Function
+        function refreshWorkers() {
+            showAlert('Worker locations updated!');
+            
+            // Simulate real-time updates by slightly moving markers
+            const markers = document.querySelectorAll('.worker-marker');
+            markers.forEach(marker => {
+                const currentTop = parseFloat(marker.style.top);
+                const currentLeft = parseFloat(marker.style.left);
+                
+                // Small random movement
+                const newTop = Math.max(20, Math.min(70, currentTop + (Math.random() - 0.5) * 5));
+                const newLeft = Math.max(20, Math.min(80, currentLeft + (Math.random() - 0.5) * 5));
+                
+                marker.style.top = newTop + '%';
+                marker.style.left = newLeft + '%';
+            });
+        }
+
+        // Event Listeners
+
+        // Back Button
+        backButton.addEventListener('click', () => {
+            showPage('dashboard-page');
+        });
+
+        // Bottom Navigation
+        navItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = item.getAttribute('data-page');
+                showPage(pageId);
+            });
+        });
+
+        // Quick Action Buttons
+        document.getElementById('home-btn').addEventListener('click', () => {
+            showPage('dashboard-page');
+        });
+
+        document.getElementById('about-btn').addEventListener('click', () => {
+            showPage('about-page');
+        });
+
+        document.getElementById('hazard-btn').addEventListener('click', () => {
+            showPage('hazard-page');
+        });
+
+        document.getElementById('report-btn').addEventListener('click', () => {
+            showPage('reports-page');
+        });
+
+        // Regulation Item
+        document.getElementById('regulation-item').addEventListener('click', () => {
+            showPage('regulation-page');
+        });
+
+        // Emergency Button
+        document.getElementById('emergency-btn').addEventListener('click', () => {
+            document.getElementById('emergency-modal').style.display = 'flex';
+        });
+
+        // Emergency Modal
+        document.getElementById('cancel-emergency').addEventListener('click', () => {
+            document.getElementById('emergency-modal').style.display = 'none';
+        });
+
+        document.getElementById('confirm-emergency').addEventListener('click', () => {
+            document.getElementById('emergency-modal').style.display = 'none';
+            
+            // Update alert count
+            const alertCount = document.getElementById('alerts-count');
+            alertCount.textContent = parseInt(alertCount.textContent) + 1;
+            
+            showAlert('Emergency alert sent to safety team!');
+        });
+
+        // Check-in Button
+        document.getElementById('check-in-btn').addEventListener('click', () => {
+            const checkInBtn = document.getElementById('check-in-btn');
+            const checkInStatus = document.getElementById('check-in-status');
+            const workersCount = document.getElementById('workers-count');
+            const locationWorkersCount = document.getElementById('location-workers-count');
+            
+            isCheckedIn = !isCheckedIn;
+            
+            if (isCheckedIn) {
+                checkInBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> CHECK OUT';
+                checkInStatus.innerHTML = '<span class="checked-in">Checked in at ' + new Date().toLocaleTimeString() + '</span>';
+                
+                // Update worker counts
+                const newCount = parseInt(workersCount.textContent) + 1;
+                workersCount.textContent = newCount;
+                locationWorkersCount.textContent = newCount;
+                
+                showAlert('Successfully checked in!');
+            } else {
+                checkInBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> CHECK IN';
+                checkInStatus.innerHTML = 'Not checked in';
+                
+                // Update worker counts
+                const newCount = parseInt(workersCount.textContent) - 1;
+                workersCount.textContent = newCount;
+                locationWorkersCount.textContent = newCount;
+                
+                showAlert('Successfully checked out!');
+            }
+        });
+
+        // Hazard Form Submission
+        document.getElementById('submit-hazard-btn').addEventListener('click', () => {
+            const hazardType = document.getElementById('hazard-type').value;
+            const hazardLocation = document.getElementById('hazard-location').value;
+            const hazardDescription = document.getElementById('hazard-description').value;
+            
+            if (!hazardType || !hazardLocation || !hazardDescription) {
+                showAlert('Please fill in all required fields', 'error');
+                return;
+            }
+            
+            // Update hazard count
+            const hazardCount = document.getElementById('hazards-count');
+            hazardCount.textContent = parseInt(hazardCount.textContent) + 1;
+            
+            // Reset form
+            document.getElementById('hazard-type').value = '';
+            document.getElementById('hazard-location').value = '';
+            document.getElementById('hazard-description').value = '';
+            document.getElementById('severity-level').value = 'low';
+            
+            showAlert('Hazard report submitted successfully!');
+            
+            // Navigate back to dashboard
+            setTimeout(() => {
+                showPage('dashboard-page');
+            }, 2000);
+        });
+
+        // PDF Download
+        document.getElementById('download-pdf-btn').addEventListener('click', () => {
+            showAlert('PDF download started!');
+        });
+
+        // Header Icons
+        document.getElementById('notifications-btn').addEventListener('click', () => {
+            showAlert('Notifications feature coming soon!');
+        });
+
+        document.getElementById('profile-btn').addEventListener('click', () => {
+            showAlert('Profile feature coming soon!');
+        });
+
+        // Report Filter
+        document.getElementById('report-filter').addEventListener('change', (e) => {
+            showAlert(`Showing reports for: ${e.target.options[e.target.selectedIndex].text}`);
+        });
+
+        // Refresh Workers Button
+        document.getElementById('refresh-workers').addEventListener('click', refreshWorkers);
+
+        // Close modal when clicking outside
+        document.getElementById('emergency-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'emergency-modal') {
+                document.getElementById('emergency-modal').style.display = 'none';
+            }
+        });
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', () => {
+            updateBackButton();
+            initializeWorkerMap();
+            showAlert('Welcome to the Safety App!');
+        });
+
+        // Simulate real-time updates
+        setInterval(() => {
+            // Randomly update some stats to show live data
+            if (Math.random() > 0.95) {
+                const alertCount = document.getElementById('alerts-count');
+                if (parseInt(alertCount.textContent) > 0) {
+                    alertCount.textContent = parseInt(alertCount.textContent) - 1;
+                }
+            }
+        }, 30000);
+
+        // Simulate worker movement every 2 minutes
+        setInterval(() => {
+            if (currentPage === 'location-page') {
+                refreshWorkers();
+            }
+        }, 120000);
+    </script>
+</body>
+</html>
